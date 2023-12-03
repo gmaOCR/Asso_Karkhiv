@@ -9,8 +9,8 @@ def user_photo_upload_filename(instance):
 
 class Member(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to=user_photo_upload_filename)
+    photo = models.ImageField(upload_to=user_photo_upload_filename, blank=True)
     biography = models.TextField()
-    projects = models.ManyToManyField('projects.Project', related_name="members")
+    projects = models.ManyToManyField('projects.Project', related_name="members", blank=True)
 
 

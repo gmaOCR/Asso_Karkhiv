@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import Project
 
-# Register your models here.
+
+# TODO: coder l'affichage admin et sa logique
+
+admin.site.register(Project)
