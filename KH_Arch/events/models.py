@@ -1,5 +1,12 @@
 from django.db import models
 
 
-# TODO: Coder le model suivant le Diagramme UML 01/12/23
-# Create your models here.
+class Event(models.Model):
+    description = models.TextField()
+    place = models.CharField(max_length=255)
+    date = models.DateField()
+    photos = models.ManyToManyField('gallery.Photo', related_name='events',
+                                    blank=True)  # blank=True permet de ne pas avoir de photos liées
+
+    def __str__(self):
+        return self.description
