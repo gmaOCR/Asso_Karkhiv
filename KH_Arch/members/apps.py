@@ -6,8 +6,3 @@ class MembersConfig(AppConfig):
 
     def ready(self):
         import members.signals
-
-
-class ArchitectsConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'members'
