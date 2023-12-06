@@ -1,5 +1,8 @@
 import os
 
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+from django.core.files.base import ContentFile
 from django.db import models
 from PIL import Image
 from io import BytesIO
@@ -9,16 +12,44 @@ import sys
 
 class Photo(models.Model):
     description = models.TextField()
-    image = models.ImageField(upload_to='photos/')
-    thumbnail = models.ImageField(upload_to='thumbnails/', editable=False)
+    image = models.ImageField(upload_to='media/photos/')
+    thumbnail = models.ImageField(upload_to='media/thumbnails/', editable=False)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
 
     def save(self, *args, **kwargs):
+        if self.image:
+            pil_image = Image.open(self.image)
+            if pil_image.mode == 'P':  # Vérifier si l'image est en mode palette
+                # Convertir l'image en mode RGB
+                pil_image = pil_image.convert('RGB')
+
+                # Sauvegarder l'image convertie dans un objet BytesIO
+                buffer = BytesIO()
+                pil_image.save(buffer, format='JPEG')
+                self.image.save(self.image.name, ContentFile(buffer.getvalue()), save=False)
+
         # Si l'image est déjà sauvegardée et que le chemin est accessible, créez le thumbnail
         if self.image and hasattr(self.image, 'path'):
             self.create_thumbnail()
 
         # Appelez la méthode save() du parent pour sauvegarder l'instance de Photo
         super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        # Supprimez le fichier image associé s'il existe
+        if self.image:
+            if os.path.isfile(self.image.path):
+                os.remove(self.image.path)
+
+        # Supprimez le fichier miniature associé s'il existe
+        if self.thumbnail:
+            if os.path.isfile(self.thumbnail.path):
+                os.remove(self.thumbnail.path)
+
+        # Assurez-vous de supprimer l'instance de modèle après la suppression des fichiers
+        super(Photo, self).delete(*args, **kwargs)
 
     def create_thumbnail(self):
         # Ouvrez l'image originale
