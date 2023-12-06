@@ -14,3 +14,9 @@ class Member(models.Model):
     projects = models.ManyToManyField('projects.Project', related_name="members", blank=True)
 
 
+class NonMember(models.Model):
+    firstname = models.CharField(max_length=50)
+    lastname = models.CharField(max_length=50)
+    projects = models.ManyToManyField('projects.Project', related_name="non_members", blank=True)
+
+
