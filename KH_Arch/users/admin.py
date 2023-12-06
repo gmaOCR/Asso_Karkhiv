@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.models import Group
 
 from .adminForms import CustomUserChangeForm
 from .models import User
@@ -11,3 +12,4 @@ class UserAdmin(admin.ModelAdmin):
 
 
 admin.register(UserAdmin)
+admin.site.unregister(Group)
