@@ -31,17 +31,17 @@ class PhotoAdminForm(forms.ModelForm):
 
     def get_object_id_choices(self):
         project_choices = [(obj.id, f"{obj.title} (ID: {obj.id})") for obj in Project.objects.all()]
-        event_choices = [(obj.id, f"{obj.name} (ID: {obj.id})") for obj in Event.objects.all()]
+        event_choices = [(obj.id, f"{obj.title} (ID: {obj.id})") for obj in Event.objects.all()]
         return project_choices + event_choices
 
     def save(self, commit=True):
         photo = super().save(commit=False)
-        object_type = self.cleaned_data['object_type']
+        content_type = self.cleaned_data['content_type']
         object_id = self.cleaned_data['object_id']
 
-        if object_type == 'project':
+        if content_type == 'project':
             content_type = ContentType.objects.get_for_model(Project)
-        elif object_type == 'event':
+        elif content_type == 'event':
             content_type = ContentType.objects.get_for_model(Event)
 
         photo.content_type = content_type

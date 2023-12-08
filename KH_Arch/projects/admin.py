@@ -2,6 +2,8 @@ from django.contrib import admin
 from .models import Project
 
 
-# TODO: coder l'affichage admin et sa logique
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description', 'place', 'date',)
 
-admin.site.register(Project)
+
+admin.site.register(Project, ProjectAdmin)

@@ -1,6 +1,13 @@
 from django.contrib import admin
-from .models import Member
+from .models import Member, NonMember
 from .adminForms import MemberForm
+
+
+def list_projects(self, obj):
+    return ", ".join([project.title for project in obj.projects.all()])
+
+
+list_projects.short_description = 'Projects'
 
 
 class MemberAdmin(admin.ModelAdmin):
@@ -23,10 +30,15 @@ class MemberAdmin(admin.ModelAdmin):
 
     get_user_lastname.short_description = ' LastName'
 
-    def list_projects(self, obj):
-        return ", ".join([project.name for project in obj.projects.all()])
+    list_projects = list_projects
 
-    list_projects.short_description = 'Projects'
+
+class NonMemberAdmin(admin.ModelAdmin):
+    list_display = ('firstname', 'lastname', 'list_projects')
+    filter_horizontal = ('projects',)
+
+    list_projects = list_projects
 
 
 admin.site.register(Member, MemberAdmin)
+admin.site.register(NonMember, NonMemberAdmin)
