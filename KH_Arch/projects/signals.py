@@ -21,11 +21,7 @@ def project_delete(instance, **kwargs):
 
 
 @receiver(pre_delete, sender=Project)
-def delete_files_linked_to_project(sender, instance, **kwargs):
-    """Supprimer les fichiers File avant la CASCADE"""
-    # Récupérer tous les objets File liés au projet qui va être supprimé
-    files = File.objects.filter(project=instance)
-
+def delete_files_linked_to_project(instance, **kwargs):
     # Supprimer les fichiers physiques associés
     for file in File.objects.filter(project=instance):
         try:
