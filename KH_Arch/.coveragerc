@@ -1,0 +1,27 @@
+[run]
+branch = True
+source =
+    KH_Arch
+    home
+    gallery
+    events
+    members
+    projects
+    users
+
+[report]
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    raise AssertionError
+    raise NotImplementedError
+    if __name__ == .__main__.:
+
+omit =
+    */migrations/*
+    */tests/*
+    *__init__*
+
+[html]
+directory = coverage_html
+
