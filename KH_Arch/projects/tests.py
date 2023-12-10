@@ -44,7 +44,7 @@ class ProjectSignalTests(TestCase):
         photo_path = self.photo.image.path
         file_path = self.file.file.path
         self.project.delete()
-        print(self.file)
+
         # Vérifier que la photo et le fichier ont été supprimés
         self.assertFalse(Photo.objects.filter(id=self.photo.id).exists())
         self.assertFalse(File.objects.filter(id=self.file.id).exists())
