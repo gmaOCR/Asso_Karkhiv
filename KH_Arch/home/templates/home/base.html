@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Association d'Architectes</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+<div class="banner">
+    <h2>Banner</h2>
+</div>
+<nav class="navbar">
+    <h2>Navigation Bar</h2>
+            <ul>
+                <li>{% block nav_about %}<a href="#about">About</a>{% endblock %}</li>
+                <li>{% block nav_news %}<a href="#news">News</a>{% endblock %}</li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Projects</a>
+                    <div class="dropdown-content">
+                    {% for type_code, type_name in types %}
+                        <a href="{% url 'projects_type' type_code %}">{{ type_name }}</a>
+                    {% empty %}
+                        Pas de types de projets disponibles.
+                    {% endfor %}
+                    </div>
+                </li>
+                <li>{% block nav_events %}<a href="#events">Events</a>{% endblock %}</li>
+            </ul>
+</nav>
+</header>
+        <main class="description">
+                <h2>Description</h2>
+        {% block content %}
+        <!-- Contenu par défaut ou spécifique à la page -->
+        {% endblock %}
+    </main>
+<footer>
+    <h2>Footer</h2>
+    <!-- Contenu du pied de page ici -->
+</footer>
+
+</body>
+</html>

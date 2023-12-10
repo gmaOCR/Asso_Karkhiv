@@ -1,0 +1,108 @@
+/* Style général pour le body */
+body, html {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    color: black; /* Couleur de texte par défaut en noir */
+}
+
+/* Style pour la bannière, la navbar et le footer */
+.banner, footer, .description {
+    text-align: center; /* Centre le texte */
+    padding: 20px;
+    margin: 10px;
+    border: 3px solid; /* Bordure générique */
+}
+
+/* Styles spécifiques pour les bordures de chaque section */
+.banner {
+    border-color: #4CAF50; /* Vert */
+}
+
+.description {
+    border-color: #f44336; /* Rouge */
+}
+
+footer {
+    border-color: #9E9E9E; /* Gris */
+}
+
+/* Style pour la barre de navigation */
+.navbar {
+    text-align: center; /* Centre la navbar entière */
+    border-color: #2196F3; /* Bleu */
+    padding: 20px;
+    margin: 10px;
+    border: 3px solid;
+}
+
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex; /* Utilisez flex pour un meilleur contrôle du layout */
+    justify-content: center; /* Centre les éléments de la liste */
+    text-align: left;
+}
+
+.navbar li {
+    position: relative; /* Position relative pour le positionnement du dropdown */
+}
+
+.navbar li a {
+    color: black; /* Texte en noir */
+    padding: 14px 16px;
+    text-decoration: none;
+    display: block; /* Rend le lien cliquable sur toute la zone de l'élément */
+}
+
+.navbar li a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Style pour les titres de section */
+h2 {
+    margin: 0;
+    padding: 10px;
+    color: black;
+}
+
+/* Style pour le menu déroulant */
+.dropdown .dropbtn {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: black;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    left: 0; /* Alignement à gauche avec le bouton déclencheur */
+    width: max-content; /* Ajustez la largeur au contenu le plus large */
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block; /* Assure l'affichage vertical */
+    text-align: left; /* Alignement du texte à gauche */
+    white-space: nowrap; /* Empêche le texte de passer à la ligne */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block; /* Affiche le contenu déroulant lors du survol */
+}
+
+/* Styles pour les éléments de liste dans dropdown-content pour s'afficher verticalement */
+.dropdown-content li {
+    display: block; /* Affiche les éléments en blocs verticaux */
+}
