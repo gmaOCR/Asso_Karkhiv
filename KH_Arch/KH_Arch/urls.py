@@ -16,9 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from gallery import views
+from gallery import views as gallery_views
+from home import views as home_views
+from projects import views as project_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('get-content-objects/', views.get_content_objects, name='get-content-objects'),
+    path('get-content-objects/', gallery_views.get_content_objects, name='get-content-objects'),
+    path('', home_views.home_page, name='home'),
+    path('type/<str:type_code>/', project_views.project_list_by_type, name='projects_type'),
 ]
