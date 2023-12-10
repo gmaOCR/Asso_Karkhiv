@@ -3,3 +3,7 @@
 /KH_Arch/db.sqlite3
 /.$UML Diagrams.drawio.bkp
 /.$UML Diagrams.drawio.dtmp
+/run_dbshell
+/run_env
+/run_djangoShell
+/run_test
