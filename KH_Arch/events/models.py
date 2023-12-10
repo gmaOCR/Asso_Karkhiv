@@ -1,4 +1,6 @@
+from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils import timezone
 
 
 class Event(models.Model):
@@ -6,8 +8,15 @@ class Event(models.Model):
     description = models.TextField()
     place = models.CharField(max_length=255)
     date = models.DateField()
-    photos = models.ManyToManyField('gallery.Photo', related_name='events',
-                                    blank=True)  # blank=True permet de ne pas avoir de photos liées
+
+    def clean(self):
+        """Vérifier que la date de l'Event est dans le futur."""
+        if self.date and self.date.date() < timezone.now().date():
+            raise ValidationError("La date de l'Event doit être dans le futur.")
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.description
