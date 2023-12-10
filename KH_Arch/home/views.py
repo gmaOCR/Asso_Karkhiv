@@ -1,3 +1,10 @@
 from django.shortcuts import render
 
-# Create your views here.
+from projects.models import ProjectType
+
+
+def home_page(request):
+    types = ProjectType.choices
+    return render(request, 'home/base.html', {'types': types})
+
+    
