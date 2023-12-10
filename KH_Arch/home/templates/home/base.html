@@ -23,19 +23,15 @@
                     {% for type_code, type_name in types %}
                         <a href="{% url 'projects_type' type_code %}">{{ type_name }}</a>
                     {% empty %}
-                        Pas de types de projets disponibles.
+                        No project available.
                     {% endfor %}
                     </div>
                 </li>
                 <li>{% block nav_events %}<a href="#events">Events</a>{% endblock %}</li>
+                <li>{% block nav_contacts %}<a href="#contacts">Contact</a>{% endblock %}</li>
             </ul>
 </nav>
 </header>
-        <main class="description">
-                <h2>Description</h2>
-        {% block content %}
-        <!-- Contenu par défaut ou spécifique à la page -->
-        {% endblock %}
     </main>
 <footer>
     <h2>Footer</h2>
