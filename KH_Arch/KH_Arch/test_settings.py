@@ -25,6 +25,7 @@ LOGGING = {
     },
 }
 
+MEDIA_ROOT = "media_test"
 
 # Désactiver la migration pendant les tests pour accélérer l'exécution
 # class DisableMigrations:
