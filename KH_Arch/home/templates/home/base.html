@@ -6,14 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil - Association d'Architectes</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %} {% endblock %}
 </head>
 <body>
     <header>
-<div class="banner">
-    <h2>Banner</h2>
-</div>
+{% if banner %}
+    <div class="banner">
+        <img src="{{ banner.image.url }}" alt="Bannière">
+    </div>
+{% endif %}
 <nav class="navbar">
-    <h2>Navigation Bar</h2>
             <ul>
                 <li>{% block nav_about %}<a href="#about">About</a>{% endblock %}</li>
                 <li>{% block nav_news %}<a href="#news">News</a>{% endblock %}</li>
@@ -32,8 +34,10 @@
             </ul>
 </nav>
 </header>
+    <main>
+        {% block content_arch %} {% endblock %}
     </main>
-<footer>
+    <footer>
     <h2>Footer</h2>
     <!-- Contenu du pied de page ici -->
 </footer>
