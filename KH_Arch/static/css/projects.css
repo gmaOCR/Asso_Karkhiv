@@ -1,0 +1,9 @@
+.projects-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.project {
+    flex-basis: calc(33.333% - 20px); /* Trois projets par ligne avec un peu d'espace */
+    margin: 10px;
+}
