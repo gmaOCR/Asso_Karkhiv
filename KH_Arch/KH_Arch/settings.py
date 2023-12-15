@@ -36,11 +36,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
-    'projects.apps.ProjectsConfig',
-    'events.apps.EventsConfig',
-    'gallery',
+    'projects',
+    'events',
+    'gallery.apps.GalleryConfig',
     'home',
-    'members.apps.MembersConfig',
+    'members',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +66,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'home.context_processors.banner_context',
+                'projects.context_processors.project_types_context'
             ],
         },
     },
@@ -126,6 +128,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "users.User"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # Here
+MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
