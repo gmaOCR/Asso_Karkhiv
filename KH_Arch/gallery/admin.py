@@ -1,20 +1,16 @@
 from django.contrib import admin
-
-from .adminForms import PhotoAdminForm
-from .models import Photo, File
+from .forms import PhotoProject, PhotoEvent, PhotoEventForm, PhotoProjectForm
 
 
-class PhotoAdmin(admin.ModelAdmin):
-    list_display = ('description', 'image', 'content_type', 'content_object',)
-    form = PhotoAdminForm
-
-    class Media:
-        js = ('js/admin.js',)
+class PhotoEventAdmin(admin.ModelAdmin):
+    form = PhotoEventForm
+    # Autres configurations...
 
 
-class FileAdmin(admin.ModelAdmin):
-    list_display = ('id', 'file', 'project', 'event',)
+class PhotoProjectAdmin(admin.ModelAdmin):
+    form = PhotoProjectForm
+    # Autres configurations...
 
 
-admin.site.register(Photo, PhotoAdmin)
-admin.site.register(File, FileAdmin)
+admin.site.register(PhotoEvent, PhotoEventAdmin)
+admin.site.register(PhotoProject, PhotoProjectAdmin)
