@@ -8,11 +8,12 @@ class Event(models.Model):
     description = models.TextField()
     place = models.CharField(max_length=255)
     date = models.DateField()
+    cover = models.ImageField(upload_to='event_covers/', null=True, blank=True)
 
     def clean(self):
         """Vérifier que la date de l'Event est dans le futur."""
-        if self.date and self.date.date() < timezone.now().date():
-            raise ValidationError("La date de l'Event doit être dans le futur.")
+        if self.date and self.date < timezone.now().date():
+            raise ValidationError("The date must set in the future")
 
     def save(self, *args, **kwargs):
         self.clean()
