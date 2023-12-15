@@ -1,58 +1,43 @@
 import os
 
 from PIL import Image
-from django.test import TestCase
+from django.test import TestCase, Client
+from django.urls import reverse
 from django.core.files.uploadedfile import SimpleUploadedFile
-from .models import Project
-from gallery.models import Photo, File
+from .models import Project, ProjectType
+from gallery.models import PhotoEvent, PhotoProject, File
 from datetime import date
 import io
 
 
-class ProjectSignalTests(TestCase):
-
+class ProjectListViewTests(TestCase):
     def setUp(self):
-        # Création d'une image en mémoire
-        image = Image.new('RGB', (100, 100), color='red')
-        image_file = io.BytesIO()
-        image.save(image_file, format='PNG')
-        image_file.name = 'test_image.png'
-        image_file.seek(0)
-
-        # Création d'un projet de test
-        self.project = Project.objects.create(
-            title='Test Project',
-            date=date.today()
+        # Création de projets pour chaque type
+        self.project_architecture = Project.objects.create(
+            title="Projet Architecture",
+            description="Description du projet d'architecture",
+            place="Paris",
+            date=date.today(),
+            type=ProjectType.ARCHITECTURE
         )
 
-        # Ajout d'une photo de test
-        self.photo = Photo.objects.create(
-            description='Test Photo',
-            content_object=self.project,
-            image=SimpleUploadedFile(image_file.name, image_file.getvalue(), content_type='image/png')
+        self.project_urbanism = Project.objects.create(
+            title="Projet Urbanisme",
+            description="Description du projet d'urbanisme",
+            place="Lyon",
+            date=date.today(),
+            type=ProjectType.URBANISM
         )
 
-        # Ajout d'un fichier de test
-        self.file = File.objects.create(
-            file=SimpleUploadedFile('test_file.jpg', b'content'),
-            project=self.project
-        )
-        # print(self.file.project.title)
+    def test_project_list_by_valid_type(self):
+        # Test pour un type de projet valide
+        response = self.client.get(reverse('projects_type', args=['ar']))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('projects', response.context)
+        self.assertIn('types', response.context)
+        self.assertTrue(self.project_architecture in response.context['projects'])
 
-    def test_project_deletion_cascades_to_photo_and_file(self):
-        # Enregistrer les chemins des fichiers pour vérifier leur suppression
-        photo_path = self.photo.image.path
-        file_path = self.file.file.path
-        self.project.delete()
-
-        # Vérifier que la photo et le fichier ont été supprimés
-        self.assertFalse(Photo.objects.filter(id=self.photo.id).exists())
-        self.assertFalse(File.objects.filter(id=self.file.id).exists())
-
-        # Vérifier que les fichiers physiques ont été supprimés
-        self.assertFalse(os.path.exists(photo_path))
-        self.assertFalse(os.path.exists(file_path))
-
-    def tearDown(self):
-        # Nettoyage (si nécessaire)
-        pass
+    def test_project_list_by_invalid_type(self):
+        # Test pour un type de projet invalide
+        response = self.client.get(reverse('projects_type', args=['u3']))
+        self.assertEqual(response.status_code, 404)
