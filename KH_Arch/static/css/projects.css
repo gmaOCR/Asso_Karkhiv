@@ -1,9 +1,18 @@
 .projects-grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(295px, 1fr));
+    grid-gap: 20px; /* Ajustez l'espacement selon vos besoins */
+    padding: 20px;
 }
 
 .project {
-    flex-basis: calc(33.333% - 20px); /* Trois projets par ligne avec un peu d'espace */
-    margin: 10px;
+    border: 1px solid #ccc; /* Bordure pour le cadre du projet */
+    padding: 10px;
+    text-align: center; /* Centrer le texte si nécessaire */
+}
+
+.project img {
+    max-width: 100%; /* Assurer que l'image ne dépasse pas le bloc */
+    max-height: 175px; /* Hauteur maximale pour la miniature */
+    object-fit: cover; /* Couper l'image pour qu'elle remplisse le cadre */
 }
