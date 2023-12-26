@@ -132,17 +132,16 @@ class ConcretePhoto(BasePhoto):
 
 class File(models.Model):
     file = models.FileField(upload_to='files')
-    project = models.ForeignKey('projects.Project', on_delete=models.CASCADE, null=True, blank=True,
-                                related_name='project_files')
-    event = models.ForeignKey('events.Event', on_delete=models.CASCADE, null=True, blank=True,
+    project = models.ForeignKey('projects.Project', on_delete=models.CASCADE,
+                                related_name='project_files', blank=True, null=True)
+    event = models.ForeignKey('events.Event', on_delete=models.CASCADE, blank=True, null=True,
                               related_name='event_files')
 
     def clean(self):
-        # Vérifier si à la fois projet et event sont définis ou si aucun des deux n'est défini
+        # Vérifier si à la fois projet et event sont définis
         if self.project and self.event:
             raise ValidationError("A File cannot be linked to both a project and an event.")
-        if not self.project and not self.event:
-            raise ValidationError("A File must be linked to either a project or an event.")
+        # Pas besoin de valider si ni project ni event ne sont définis, puisque le modèle autorise cela.
 
     def save(self, *args, **kwargs):
         self.clean()
@@ -159,6 +158,9 @@ class File(models.Model):
         if self.file and os.path.isfile(self.file.path):
             os.remove(self.file.path)
             print(f"Fichier {self.file.path} supprimé.")
+        if self.file:
+            default_storage.delete(self.file.name)
+            print(f"Fichier {self.file.name} supprimé.")
         super().delete(*args, **kwargs)
 
     @classmethod
