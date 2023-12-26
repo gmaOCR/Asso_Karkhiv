@@ -1,6 +1,6 @@
 {% extends 'home/base.html' %}
 {% load static %}
-{% block content_arch %}
+{% block content %}
 <div class="project-detail">
     <h2>{{ project.title }}</h2>
     {% if project.thumbnail %}
@@ -14,7 +14,7 @@
         <h3>Galerie</h3>
         {% for photo in photos %}
             <div class="gallery-item">
-                <img src="{{ photo.image.url }}" alt="{{ photo.description }}">
+                <img src="{{ photo.thumbnail.url }}" alt="{{ photo.description }}">
             </div>
         {% empty %}
             <p>Aucune photo disponible pour ce projet.</p>
