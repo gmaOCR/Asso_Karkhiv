@@ -1,11 +1,15 @@
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
-from .models import  Project
+from .models import  Project, ProjectType
 from gallery.models import PhotoProject, File
 
 
 def project_list_by_type(request, type_code):
     projects, type_name = Project.get_by_type(type_code)
+
+    if type_code not in [code for code, _ in ProjectType.choices]:
+        raise Http404("Type de projet invalide")
+
     if projects is None:
         raise Http404(type_name)
 
