@@ -1,0 +1,24 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block content %}
+<div class="object-detail">
+    <h2>{{ event.title }}</h2>
+    {% if event.cover %}
+        <img src="{{ event.cover }}" alt="{{ event.title }}">
+    {% else %}
+        <img src="{% static 'default/no_pics.png' %}" alt="No Image">
+    {% endif %}
+    <p>{{ event.description }}</p>
+    <!-- Galerie des photos du projet -->
+    <div class="object-gallery">
+        <h3>Gallery</h3>
+        {% for photo in photos %}
+            <div class="gallery-item">
+                <img src="{{ photo.image.url }}" alt="{{ photo.description }}">
+            </div>
+        {% empty %}
+            <p>No files avalaible for this object.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
