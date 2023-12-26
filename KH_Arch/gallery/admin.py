@@ -1,16 +1,19 @@
 from django.contrib import admin
-from .forms import PhotoProject, PhotoEvent, PhotoEventForm, PhotoProjectForm
+from .models import PhotoProject, PhotoEvent, File
+
+
+class FileAdmin(admin.ModelAdmin):
+    list_display = ("file","project","event",)
 
 
 class PhotoEventAdmin(admin.ModelAdmin):
-    form = PhotoEventForm
-    # Autres configurations...
+    list_display = ("event", "description", "image",)
 
 
 class PhotoProjectAdmin(admin.ModelAdmin):
-    form = PhotoProjectForm
-    # Autres configurations...
+    list_display = ("project", "description", "image",)
 
 
+admin.site.register(File, FileAdmin)
 admin.site.register(PhotoEvent, PhotoEventAdmin)
 admin.site.register(PhotoProject, PhotoProjectAdmin)
