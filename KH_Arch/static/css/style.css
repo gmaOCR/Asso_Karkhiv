@@ -1,14 +1,12 @@
-/* Style général pour le body */
 body, html {
-    margin: 0;
     padding: 0;
     scroll-behavior: smooth;
-    color: black; /* Couleur de texte par défaut en noir */
+    color: black;
 }
 
 body {
-    width: 80%;
-    margin: 0 auto; /* Centrer le contenu */
+    margin: 0 auto !important;
+    width: 80% !important;
 }
 
 /* Style pour la bannière, la navbar et le footer */
@@ -52,6 +50,7 @@ footer {
 .navbar {
     text-align: center; /* Centre la navbar entière */
     padding: 5px 10px;
+    display: unset !important;
 }
 
 .navbar ul {
