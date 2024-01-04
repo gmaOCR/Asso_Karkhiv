@@ -1,0 +1,60 @@
+
+{% extends 'home/base.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/caroussel.css' %}">
+{% endblock %}
+{% block carousel %}
+<div id="homeCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicateurs -->
+    <ol class="carousel-indicators">
+        <li data-target="#homeCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#homeCarousel" data-slide-to="1"></li>
+        <li data-target="#homeCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper pour les slides -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            {% if upcoming_event %}
+                <img src="{{ upcoming_event.cover.url }}" alt="Upcoming Event">
+                <div class="carousel-caption">
+                    <h3>{{ upcoming_event.title }}</h3>
+                    <p>{{ upcoming_event.description }}</p>
+                </div>
+            {% endif %}
+        </div>
+        <div class="carousel-item">
+            {% if latest_project %}
+                <img src="{{ latest_project.thumbnail.image.url }}" alt="Latest Project">
+                <div class="carousel-caption">
+                    <h3>{{ latest_project.title }}</h3>
+                    <p>{{ latest_project.description|truncatechars:150 }}</p>
+                </div>
+            {% endif %}
+        </div>
+        <div class="carousel-item">
+            {% if latest_news %}
+                <img src="{{ latest_news.thumbnail.url }}" alt="Latest News">
+                <div class="carousel-caption">
+                    <h3>{{ latest_news.title }}</h3>
+                    <p>{{ latest_news.content }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Contrôles -->
+    <a class="carousel-control-prev" href="#homeCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Prev.</span>
+    </a>
+    <a class="carousel-control-next" href="#homeCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+{% endblock %}
+
+

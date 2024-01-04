@@ -1,0 +1,25 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/objects_list.css' %}">
+{% endblock %}
+{% block content %}
+<div class="objects-grid">
+    {% for project in projects %}
+        <div class="object">
+            {% if project.thumbnail %}
+                <img src="{{ project.thumbnail.image.url }}" alt="{{ project.title }}">
+            {% else %}
+                <!-- Image par défaut si aucune miniature n'est disponible -->
+                <img src="{% static 'default/no_pics.png' %}" alt="No Image">
+            {% endif %}
+            <a href="{% url 'project_detail' project.type project.id %}">
+                <h3>{{ project.title }}</h3>
+            </a>
+            <p>{{ project.description|truncatechars:150 }}</p>
+        </div>
+    {% empty %}
+        No project available.
+    {% endfor %}
+</div>
+{% endblock %}

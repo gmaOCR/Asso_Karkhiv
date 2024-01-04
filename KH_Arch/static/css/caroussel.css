@@ -1,0 +1,119 @@
+#homeCarousel .carousel-indicators {
+    bottom: -10px;
+}
+
+#homeCarousel .carousel-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: black;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+}
+
+#homeCarousel .carousel-indicators li {
+    width: 12px;
+    height: 12px;
+    margin: 0 6px;
+    background-color: #333;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#homeCarousel .carousel-indicators .active {
+    background-color: #f00;
+}
+
+#homeCarousel .carousel-control-prev,
+#homeCarousel .carousel-control-next {
+    color: #ccc;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    transition: background-color 0.3s;
+    z-index: 2;
+}
+
+#homeCarousel .carousel-control-prev::before,
+#homeCarousel .carousel-control-next::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+transform: translate(-50%, -50%) scale(1);
+    width: 24px;
+    height: 24px;
+    background: rgba(0, 0, 0, 0);
+    border-radius: 50%;
+    transition: background-color 0.3s;
+    z-index: -1;
+}
+
+#homeCarousel .carousel-control-prev:hover::before,
+#homeCarousel .carousel-control-next:hover::before {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#homeCarousel .carousel-control-next-icon {
+    width: 15px;
+    height: 15px;
+      background-image: url("data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%3Csvg%20width%3D%22800px%22%20height%3D%22800px%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20opacity%3D%220.4%22%20d%3D%22M12%2022C17.5228%2022%2022%2017.5228%2022%2012C22%206.47715%2017.5228%202%2012%202C6.47715%202%202%206.47715%202%2012C2%2017.5228%206.47715%2022%2012%2022Z%22%20fill%3D%22%23292D32%22%2F%3E%3Cpath%20d%3D%22M10.7397%2016.2802C10.5497%2016.2802%2010.3597%2016.2102%2010.2097%2016.0602C9.91969%2015.7702%209.91969%2015.2902%2010.2097%2015.0002L13.2097%2012.0002L10.2097%209.00016C9.91969%208.71016%209.91969%208.23016%2010.2097%207.94016C10.4997%207.65016%2010.9797%207.65016%2011.2697%207.94016L14.7997%2011.4702C15.0897%2011.7602%2015.0897%2012.2402%2014.7997%2012.5302L11.2697%2016.0602C11.1197%2016.2102%2010.9297%2016.2802%2010.7397%2016.2802Z%22%20fill%3D%22%23292D32%22%2F%3E%3C%2Fsvg%3E");
+   border-radius: 50%;
+    display: block;
+    transform: scale(2);
+    z-index: 1;
+}
+
+#homeCarousel .carousel-control-prev-icon {
+    width: 15px;
+    height: 15px;
+    background-image: url("data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%3C!--%20Uploaded%20to%3A%20SVG%20Repo%2C%20www.svgrepo.com%2C%20Generator%3A%20SVG%20Repo%20Mixer%20Tools%20--%3E%3Csvg%20width%3D%22800px%22%20height%3D%22800px%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20opacity%3D%220.4%22%20d%3D%22M12%2022C17.5228%2022%2022%2017.5228%2022%2012C22%206.47715%2017.5228%202%2012%202C6.47715%202%202%206.47715%202%2012C2%2017.5228%206.47715%2022%2012%2022Z%22%20fill%3D%22%23292D32%22%2F%3E%3Cpath%20d%3D%22M13.2599%2016.2802C13.0699%2016.2802%2012.8799%2016.2102%2012.7299%2016.0602L9.19992%2012.5302C8.90992%2012.2402%208.90992%2011.7602%209.19992%2011.4702L12.7299%207.94016C13.0199%207.65016%2013.4999%207.65016%2013.7899%207.94016C14.0799%208.23016%2014.0799%208.71016%2013.7899%209.00016L10.7899%2012.0002L13.7899%2015.0002C14.0799%2015.2902%2014.0799%2015.7702%2013.7899%2016.0602C13.6499%2016.2102%2013.4599%2016.2802%2013.2599%2016.2802Z%22%20fill%3D%22%23292D32%22%2F%3E%3C%2Fsvg%3E");
+    border-radius: 50%;
+    display: block;
+    transform: scale(2);
+    z-index: 1;
+}
+
+#homeCarousel {
+    position: relative;
+    height: auto;
+    width: 80%;
+    margin: 0 auto;
+}
+
+#homeCarousel .carousel-inner {
+    position: relative;
+}
+
+#homeCarousel .carousel-item {
+    position: relative;
+    padding-bottom: 50px;
+}
+
+#homeCarousel .carousel-inner img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+#homeCarousel .carousel-control-prev-icon,
+#homeCarousel .carousel-control-next-icon {
+    width: 15px;
+    height: 15px;
+    display: block;
+    transform: scale(2);
+    z-index: 3;
+}

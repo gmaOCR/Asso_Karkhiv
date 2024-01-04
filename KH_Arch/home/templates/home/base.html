@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Home - Urbanists and Architects association of Karkhiv</title>
+    {% block extra_css %} {% endblock %}
+</head>
+<body>
+    <header>
+{% if banner %}
+    <div class="banner">
+        <img src="{{ banner.image.url }}" alt="Bannière">
+    </div>
+{% endif %}
+<nav class="navbar">
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Projects</a>
+                <div class="dropdown-content">
+                    {% for type_code, type_name in types %}
+                    <a href="{% url 'projects_type' type_code %}">{{ type_name }}</a>
+                    {% empty %}
+                    No project available.
+                    {% endfor %}
+                </div>
+                </li>
+                <li>{% block nav_events %}<a href="{% url 'events_list' %}">Events</a>{% endblock %}</li>
+                <li>{% block nav_about %}<a href="#about">About</a>{% endblock %}</li>
+                <li>{% block nav_contacts %}<a href="#contacts">Contact</a>{% endblock %}</li>
+            </ul>
+</nav>
+</header>
+
+    <main>
+            {% block carousel %}{% endblock %}
+        {% block content %} {% endblock %}
+    </main>
+    <footer>
+    <!-- Contenu du pied de page ici -->
+</footer>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
