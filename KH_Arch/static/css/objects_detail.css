@@ -1,0 +1,25 @@
+.project-detail {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start; /* Alignement en haut */
+}
+
+.thumbnail-container {
+    flex: 0 0 60%; /* Ajustement de la largeur du conteneur d'image */
+    text-align: center; /* Centrer l'image et le titre */
+}
+
+.thumbnail-container img {
+    width: 50%; /* Réduction de la taille de l'image */
+    height: auto; /* Maintien du ratio hauteur/largeur */
+}
+
+.project-description {
+    flex: 1;
+    text-align: left;
+    padding-left: 20px; /* Espacement entre l'image et la description */
+}
+
+.project-detail h2 {
+    order: 2; /* Assurez-vous que le titre est sous l'image */
+}

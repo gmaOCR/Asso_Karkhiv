@@ -1,24 +1,32 @@
-{% extends 'home/base.html' %}
-{% load static %}
-{% block content %}
+    {% extends 'home/base.html' %}
+    {% load static %}
+    {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/objects_detail.css' %}">
+    {% endblock %}
+    {% block content %}
 <div class="project-detail">
-    <h2>{{ project.title }}</h2>
+<div class="thumbnail-container">
     {% if project.thumbnail %}
-        <img src="{{ project.thumbnail.image.url }}" alt="{{ project.title }}">
+        <img src="{{ project.thumbnail.image.url }}" alt="{{ project.title }}" class="thumbnail-image">
+        <h2>{{ project.title }}</h2>
     {% else %}
-        <img src="{% static 'default/no_pics.png' %}" alt="No Image">
+        <img src="{% static 'default/no_pics.png' %}" alt="No Image" class="thumbnail-image">
+        <h2>No Image</h2>
     {% endif %}
-    <p>{{ project.description }}</p>
-    <!-- Galerie des photos du projet -->
-    <div class="project-gallery">
-        <h3>Galerie</h3>
-        {% for photo in photos %}
-            <div class="gallery-item">
-                <img src="{{ photo.thumbnail.url }}" alt="{{ photo.description }}">
-            </div>
-        {% empty %}
-            <p>Aucune photo disponible pour ce projet.</p>
-        {% endfor %}
-    </div>
 </div>
-{% endblock %}
+<div class="project-description">
+    <p>{{ project.description }}</p>
+</div>
+
+    </div>
+            <div class="project-gallery">
+            <h3>Galerie</h3>
+            {% for photo in photos %}
+                <div class="gallery-item">
+                    <img src="{{ photo.thumbnail.url }}" alt="{{ photo.description }}">
+                </div>
+            {% empty %}
+                <p>No photos avalaible for this project</p>
+            {% endfor %}
+        </div>
+    {% endblock %}
