@@ -29,3 +29,5 @@ def project_detail(request, type_code, project_id):
         'photos': photos,
         'files': files
     })
+
+# TODO Terminer la mise  en page front-end des projets détaillés
